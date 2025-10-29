@@ -1,0 +1,326 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom Font Face */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../fonts/SpaceGrotesk-Regular.woff2') format('woff2'),
+       url('../fonts/SpaceGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../fonts/SpaceGrotesk-Bold.woff2') format('woff2'),
+       url('../fonts/SpaceGrotesk-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Base Styles */
+:root {
+  --color-midnight-blue: #0F1B2D;
+  --color-teal: #2EC4B6;
+  --color-teal-dark: #25a99a;
+  --color-silver: #C0C0C0;
+  --color-white: #FFFFFF;
+  --transition-default: all 0.3s ease;
+  --shadow-default: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Global Styles */
+body {
+  @apply bg-midnight-blue text-silver;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-midnight-blue;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-teal rounded-full transition-colors duration-300;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-teal-dark;
+}
+
+/* Layout */
+main {
+  @apply pt-20; /* Compensate for fixed navbar */
+}
+
+/* Navigation */
+#main-nav {
+  @apply fixed w-full py-4 px-4 md:px-8 z-50 bg-midnight-blue/90 backdrop-blur-sm transition-all duration-300;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link {
+  @apply relative px-4 py-2 text-white hover:text-teal transition-colors duration-300 font-medium;
+}
+
+.nav-link.active {
+  @apply text-teal font-semibold;
+}
+
+.nav-link.active::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-0.5 bg-teal transition-all duration-300;
+}
+
+/* Hero Section */
+#home {
+  @apply relative min-h-screen flex items-center justify-center overflow-hidden;
+  perspective: 1000px;
+}
+
+/* Background Elements */
+#particles-js {
+  @apply absolute inset-0 z-10; /* Changed from z-1 to z-10 */
+}
+
+.aircraft-container {
+  @apply absolute inset-0 z-20 overflow-hidden; /* Changed from z-1 to z-20 */
+}
+.hero-bg-elements {
+  @apply absolute inset-0 overflow-hidden z-0;
+}
+
+.hero-bg-circle {
+  @apply absolute rounded-full blur-3xl;
+  animation: float 15s ease-in-out infinite;
+}
+
+/* Aircraft Animations - Enhanced Visibility */
+.aircraft {
+  position: absolute;
+  width: var(--size);
+  height: calc(var(--size) * 0.4);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff' opacity='0.1'%3E%3Cpath d='M22 16.21v-1.895L14 8V4a2 2 0 0 0-4 0v4l-8 6.315v1.895l8-2.526V18l-2 2v1h6v-1l-2-2v-4.316l8 2.526z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 20;
+  animation: var(--animation) var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+
+/* Enhanced Gradient Background */
+.gradient-background {
+  @apply absolute inset-0 z-0 overflow-hidden;
+}
+  .gradient-overlay {
+    @apply absolute top-0 left-0 w-full h-full bg-gradient-to-br from-midnight-blue via-[#0F1B2D] to-[#0a1424] opacity-95;
+  }
+  
+  .float-element {
+    @apply absolute rounded-full blur-3xl;
+    
+    &.slow {
+      @apply bg-teal/20 animate-float-slow;
+    }
+    &.medium {
+      @apply bg-teal/25 animate-float-medium;
+    }
+    &.fast {
+      @apply bg-white/10 animate-float-fast;
+    }
+  }
+
+
+/* Hero Content */
+.hero-content {
+  @apply relative z-30 text-center px-6 w-full max-w-7xl mx-auto;
+}
+
+.hero-title {
+  @apply block text-6xl md:text-8xl font-bold;
+  background: linear-gradient(90deg, #FFFFFF 20%, var(--color-teal) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  @apply text-xl md:text-3xl mb-8 text-silver max-w-2xl mx-auto;
+  line-height: 1.4;
+}
+
+/* Fixed Button Styles */
+.hero-button-container {
+  @apply mt-6; /* Added spacing between text and button */
+}
+
+.hero-button {
+  @apply relative z-10 block px-12 py-5 text-lg font-semibold text-white rounded-full;
+  background: linear-gradient(to right, #2EC4B6, #25a99a);
+  border: 2px solid rgba(46, 196, 182, 0.5);
+  box-shadow: 0 4px 15px rgba(46, 196, 182, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(46, 196, 182, 0.4);
+    background: linear-gradient(to right, #25a99a, #1d8f82);
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
+
+@keyframes flyRight {
+  0% { transform: translateX(-100px) translateY(var(--start-y)) rotate(-5deg); }
+  100% { transform: translateX(calc(100vw + 100px)) translateY(var(--end-y)) rotate(5deg); }
+}
+
+@keyframes flyLeft {
+  0% { transform: translateX(calc(100vw + 100px)) translateY(var(--start-y)) rotate(185deg); }
+  100% { transform: translateX(-100px) translateY(var(--end-y)) rotate(175deg); }
+}
+
+@keyframes flyDiagonalDown {
+  0% { transform: translateX(-100px) translateY(-100px) rotate(-45deg); }
+  100% { transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 100px)) rotate(-35deg); }
+}
+
+@keyframes flyDiagonalUp {
+  0% { transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 100px)) rotate(225deg); }
+  100% { transform: translateX(-100px) translateY(-100px) rotate(215deg); }
+}
+
+@keyframes flyCurveRight {
+  0% { transform: translateX(-100px) translateY(20vh) rotate(-10deg); }
+  50% { transform: translateX(50vw) translateY(10vh) rotate(0deg); }
+  100% { transform: translateX(calc(100vw + 100px)) translateY(30vh) rotate(10deg); }
+}
+
+@keyframes flyCurveLeft {
+  0% { transform: translateX(calc(100vw + 100px)) translateY(70vh) rotate(190deg); }
+  50% { transform: translateX(50vw) translateY(80vh) rotate(180deg); }
+  100% { transform: translateX(-100px) translateY(60vh) rotate(170deg); }
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch::before {
+  color: #0ff;
+  z-index: -1;
+  animation: glitch-effect 3s infinite;
+}
+
+.glitch::after {
+  color: #f0f;
+  z-index: -2;
+  animation: glitch-effect 2s infinite reverse;
+}
+
+@keyframes glitch-effect {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+  100% { transform: translate(0); }
+}
+
+/* Typewriter Effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 3px solid var(--teal);
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.15em;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--teal); }
+}
+
+/* Mobile Menu */
+#mobile-menu {
+  transform-origin: top center;
+  transition: all 0.3s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    @apply text-4xl sm:text-5xl;
+  }
+  
+  .hero-subtitle {
+    @apply text-lg;
+  }
+  
+  .hero-button {
+    @apply px-8 py-3 text-base;
+  }
+  
+  #main-nav {
+    @apply py-3;
+  }
+}
+
+/* Utility Classes */
+.animate-float-slow { 
+  animation: float 8s ease-in-out infinite; 
+}
+.animate-float-medium { 
+  animation: float 6s ease-in-out infinite 1s; 
+}
+.animate-float-fast { 
+  animation: float 4s ease-in-out infinite 0.5s; 
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Debug Styles (remove after testing) */
+.debug-bg * {
+  outline: 1px solid red !important;
+}
